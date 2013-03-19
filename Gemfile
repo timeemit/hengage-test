@@ -19,7 +19,10 @@ end
 gem 'jquery-rails'
 
 group :test, :development do
-  gem 'steak'
+  gem "rspec-rails"
   gem 'factory_girl_rails'
-  gem 'shoulda'
+end
+
+group :test do
+  gem 'shoulda-matchers'
 end

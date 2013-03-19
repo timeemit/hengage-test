@@ -14,11 +14,11 @@
 ActiveRecord::Schema.define(:version => 20130319182807) do
 
   create_table "users", :force => true do |t|
-    t.string   "email",              :default => "", :null => false
-    t.string   "encrypted_password", :default => "", :null => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.boolean  "admin"
+    t.string   "email",              :default => "",    :null => false
+    t.string   "encrypted_password", :default => "",    :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.boolean  "admin",              :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

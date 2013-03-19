@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
   
   before_create :set_default_password
   
-  validates :email, :presence => true, :format => {:with => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i}
+  validates :email, :presence => true, :format => {:with => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i},
+                    :uniqueness => true
   
   private 
   

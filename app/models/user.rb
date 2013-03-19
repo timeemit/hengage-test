@@ -4,9 +4,13 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable, :registerable
   # :recoverable, :rememberable, :trackable
   devise :database_authenticatable
+  # After reading the instructions again, devise' database authenticable solution
+  # seems to be more robust of a solution than was needed:
+  # 'foobar' is the default password *not* the required password
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
+  
   
   before_create :set_default_password
   

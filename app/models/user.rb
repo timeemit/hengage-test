@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   
   before_create :set_default_password
   
+  validates :email, :presence => true
+  
   private 
   
   def set_default_password

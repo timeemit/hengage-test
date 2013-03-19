@@ -18,7 +18,6 @@ There are two types of reports that admins (but not regular users) should be abl
 In both these reports, the reported time should be rounded to the nearest quarter hour.
 
 
-
 Some general things to keep in mind:
 
 What I'm interested in seeing here are the software design choices you make and the rationale behind them, so feel free to use both comments in the code and git commit messages to explain your thinking.

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.2'
+gem 'rails', '3.2.13'
 gem 'pg'
 gem 'devise'
 gem 'haml-rails'
@@ -21,4 +21,5 @@ gem 'jquery-rails'
 group :test, :development do
   gem 'steak'
   gem 'factory_girl_rails'
+  gem 'shoulda'
 end

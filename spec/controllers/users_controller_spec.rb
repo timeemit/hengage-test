@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UserController do
+describe UsersController do
 
   describe "GET 'show'" do
     it "returns http success" do

@@ -20,5 +20,5 @@ gem 'jquery-rails'
 
 group :test, :development do
   gem 'steak'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
 end

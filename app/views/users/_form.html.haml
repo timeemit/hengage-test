@@ -1,0 +1,11 @@
+= form_for @user do |f|
+	%p
+		= f.label :email
+		= f.text_field :email
+
+	%p
+		= f.label :admin
+		= f.check_box :admin
+	
+	%p
+		= f.submit

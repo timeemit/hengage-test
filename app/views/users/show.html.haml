@@ -1,0 +1,9 @@
+%h1 
+	This is
+	= @user.email
+%i= @user.admin? ? 'Definitely Admin' : 'Not really admin'
+
+%p
+	= link_to 'View All', users_path
+	|
+	= link_to 'Edit', edit_user_path(@user)

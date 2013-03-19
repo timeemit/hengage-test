@@ -38,4 +38,7 @@ RSpec.configure do |config|
   
   # Factory Girl short methods
   config.include FactoryGirl::Syntax::Methods
+  
+  # Devise helper methods
+  config.include Devise::TestHelpers, :type => :controller
 end

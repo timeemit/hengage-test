@@ -1,0 +1,14 @@
+%h1 Users
+
+%p= link_to 'Make a New User', new_user_path
+
+%table
+	%tr
+		%th Email
+		%th Admin?
+	- @users.each do |user|
+		%tr 
+			%td= user.email
+			%td= user.admin ? 'Aye!' : 'Nay!'
+			%td= link_to 'View', user_path(user)
+			%td= link_to 'Edit', edit_user_path(user)

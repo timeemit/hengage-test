@@ -6,7 +6,6 @@ describe UsersController do
     let(:user) { create(:admin) }
     
     before(:each) do 
-      user
       sign_in user
     end
 

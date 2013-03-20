@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  # before_filter :authenticate_user!
   before_filter :require_admin!, :only => [:new, :edit, :create, :update]
 
   def index

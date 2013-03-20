@@ -11,13 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320153647) do
+ActiveRecord::Schema.define(:version => 20130320171020) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "time_blocks", :force => true do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "time_blocks", ["project_id"], :name => "index_time_blocks_on_project_id"
+  add_index "time_blocks", ["user_id"], :name => "index_time_blocks_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",              :default => "",    :null => false

@@ -1,17 +1,17 @@
 %h1 Listing projects
 
+%p= link_to 'Make a New Project', new_project_path
+
 %table
-  %tr
-    %th
-    %th
-    %th
+	%tr
+		%th Name
+		%th
+		%th
 
-  - @projects.each do |project|
-    %tr
-      %td= link_to 'Show', project
-      %td= link_to 'Edit', edit_project_path(project)
-      %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
+	- @projects.each do |project|
+		%tr
+			%td= project.name
+			%td= link_to 'Show', project
+			%td= link_to 'Edit', edit_project_path(project)
 
-%br
-
-= link_to 'New Project', new_project_path
+%p= link_to 'Make a New Project', new_project_path

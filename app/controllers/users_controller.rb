@@ -19,12 +19,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.build(params[:user])
+    @user = User.new(params[:user])
     if @user.save 
-      redirect_to @user, notice: 'Saved!  You\'re awesome!'
+      redirect_to user_path(@user), notice: 'Saved!  You\'re awesome!'
     else
       flash.now[:alert] = 'Oh no!  Something wasn\'t quite right'
-      render :new
+      render action: 'new'
     end
   end
 
@@ -33,8 +33,8 @@ class UsersController < ApplicationController
     if @user.update_attributes(params[:user]) 
       redirect_to @user, notice: 'Saved!  You\'re awesome!'
     else
-      flash.now[:alert] = 'Oh no! Something wasn\'t quite right!'
-      render :edit
+      flash.now[:alert] = 'Ayee yeeah! Something wasn\'t quite right!'
+      render action: 'edit'
     end
   end
 end

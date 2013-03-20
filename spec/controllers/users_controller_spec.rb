@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UsersController do
  
-  describe 'When the user is admin' do
+  describe 'when the user is admin' do
     let(:user) { create(:admin) }
     
     before(:each) do 
@@ -47,16 +47,15 @@ describe UsersController do
       let(:new_email) { 'new@hengage.com' }
       
       it "returns http redirect with valid params" do
-        post 'create', {}, {email: new_email}
-        expect(response).to render_template("show")
+        post 'create', {user: {email: new_email}}
         response.should be_redirect
         User.count.should eql 2
         User.last.email.should eql new_email
       end
 
       it "returns http succes with invalid params" do
-        post 'create', {}, {email: 'hello'}
-        response.should be_ok
+        post 'create', {user: {email: 'hello'}}
+        expect(response).to render_template("new")
         User.last.email.should_not be_eql new_email
       end
     end
@@ -65,14 +64,14 @@ describe UsersController do
       let(:updated_email) { 'revised@hengage.com' }
       
       it "returns http redirect with valid params" do
-        put 'update', {id: user.id}, user: {email: updated_email}
+        put 'update', {id: user.id, user: {email: updated_email} } 
         response.should be_redirect
         user.reload.email.should eql updated_email
       end
 
       it "returns http success with invalid params" do 
-        put 'update', {id: user.id}, {user: {email: 'hello'} }
-        response.should be_redirect
+        put 'update', {id: user.id, user: {email: 'hello'} }
+        response.should be_success
         User.last.email.should_not be_eql updated_email
       end
     end

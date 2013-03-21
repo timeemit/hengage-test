@@ -7,7 +7,14 @@ class UsersController < ApplicationController
   end
 
   def show
+    params[:report].present? ? (@start_time = time_from_params('start_time')) : (@start_time = Time.zone.now - 1.day)
+    params[:report].present? ? (@end_time = time_from_params('end_time')) : (@end_time = Time.zone.now)
     @user = User.find(params[:id])
+    if @start_time < @end_time
+      @user_report = UserReport.new(:user_id => @user.id, :start_time => @start_time, :end_time => @end_time)
+    else
+      flash[:alert] = 'The times you\'ve entered don\'t make sense!!!  May get strange response!'
+    end
   end
 
   def new

@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :time_blocks
+  has_many :projects, :through => :time_blocks
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

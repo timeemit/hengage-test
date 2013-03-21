@@ -1,0 +1,17 @@
+%h1 Listing time_blocks
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @time_blocks.each do |time_block|
+    %tr
+      %td= link_to 'Show', time_block
+      %td= link_to 'Edit', edit_time_block_path(time_block)
+      %td= link_to 'Destroy', time_block, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Time block', new_time_block_path

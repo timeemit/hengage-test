@@ -7,12 +7,12 @@ class ProjectsController < ApplicationController
 
   def show
     params[:report].present? ? (@start_time = time_from_params('start_time')) : (@start_time = Time.zone.now - 1.day)
-    params[:report].present? ? (@end_time = time_from_params('end_time')) : (@end_time = Time.zone.now - 1.day)
+    params[:report].present? ? (@end_time = time_from_params('end_time')) : (@end_time = Time.zone.now)
     @project = Project.find(params[:id])
-    if @start_time > @end_time
-      flash[:alert] = 'End Time is before the Start Time??!'
-    else
+    if @start_time <= @end_time
       @project_report = ProjectReport.new(:project_id => @project.id, :start_time => @start_time, :end_time => @end_time)
+    else
+      flash[:alert] = 'End Time is before the Start Time!!!  May get strange response!'
     end
   end
 

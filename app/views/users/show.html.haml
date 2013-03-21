@@ -21,7 +21,7 @@
 		%th Hours Worked on this Project
 	- @user_report.projects.each do |project|
 		%tr
-			%td= project.name
+			%td= link_to project.name, project_path(project)
 			%td= rounded_hours_from_seconds @user_report.seconds_worked_for[project.id]
 
 %p

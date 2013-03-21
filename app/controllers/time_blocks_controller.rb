@@ -5,19 +5,22 @@ class TimeBlocksController < ApplicationController
 
   def new
     @time_block = TimeBlock.new
+    @projects = Project.all
   end
 
   def edit
     @time_block = current_user.time_blocks.where(:id => params[:id]).first
+    @projects = Project.all
   end
 
   def create
     @time_block = current_user.time_blocks.build(params[:time_block])
 
     if @time_block.save
-      redirect_to @time_block, notice: 'Time Block saved!  Woohoo!'
+      redirect_to time_blocks_path, notice: 'Time Block saved!  Woohoo!'
     else
-      flash[:error] = 'Blast!  Something wasn\'t quite right'
+      @projects = Project.all
+      flash[:alert] = 'Blast!  Something wasn\'t quite right'
       render action: "new"
     end
   end
@@ -26,9 +29,10 @@ class TimeBlocksController < ApplicationController
     @time_block = current_user.time_blocks.where(:id => params[:id]).first
 
     if @time_block.update_attributes(params[:time_block])
-      redirect_to @time_block, notice: 'Time block was successfully updated.'
+      redirect_to time_blocks_path, notice: 'Time block was successfully updated.'
     else
-      flash[:error] = 'Shoot!  Something wasn\'t quite right'
+      @projects = Project.all
+      flash[:alert] = 'Shoot!  Something wasn\'t quite right'
       render action: "edit" 
     end
   end

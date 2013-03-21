@@ -1,10 +1,15 @@
 = form_for @time_block do |f|
-  - if @time_block.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@time_block.errors.count, "error")} prohibited this time_block from being saved:"
-      %ul
-        - @time_block.errors.full_messages.each do |msg|
-          %li= msg
+	%p
+		= f.label :project_id
+		= f.select :project_id, @projects.collect{|p| [p.name, p.id] }, { :include_blank => true }
+	
+	%p 
+		= f.label :start_time, 'Start Time'
+		= f.datetime_select :start_time
 
-  .actions
-    = f.submit 'Save'
+	%p 
+		= f.label :end_time, 'End Time'
+		= f.datetime_select :end_time
+		
+	.actions
+		= f.submit 'Save'

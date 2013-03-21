@@ -6,7 +6,6 @@
 		%th Start Time
 		%th End Time
 		%th 
-		%th 
 		%th
 
 	- @time_blocks.each do |time_block|
@@ -14,7 +13,6 @@
 			%td= time_block.project.name
 			%td= display_time time_block.start_time
 			%td= display_time time_block.end_time
-			%td= link_to 'Show', time_block
 			%td= link_to 'Edit', edit_time_block_path(time_block)
 			%td= link_to 'Destroy', time_block, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

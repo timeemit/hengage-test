@@ -20,6 +20,10 @@ class TimeBlock < ActiveRecord::Base
     start_time <= time and time <= end_time ? true : false
   end
   
+  def contains?(other_time_block)
+    other_time_block.includes?(start_time) or other_time_block.includes?(end_time)
+  end
+  
   private
   
   def sequence_of_times
@@ -29,16 +33,19 @@ class TimeBlock < ActiveRecord::Base
   end
   
   def against_overlapping
+    # Make all attributes are valid and functional
     if start_time.is_a? Time and end_time.is_a? Time and project_id.present? and user_id.present?
       # Iterate through other time blocks of the same user and project
       otbs = other_time_blocks
       unless otbs.empty?
+        # Initialize iteration
         other_time_block = otbs.pop
         while other_time_block and errors.blank?
-          if other_time_block.includes?(start_time) or other_time_block.includes?(end_time) or
-            includes?(other_time_block.start_time) or includes?(other_time_block.end_time)
+          # Check for overlap with contains? and includes? methods
+          if other_time_block.contains?(self) or contains?(other_time_block)
             self.errors[:base] << 'this time overlaps with other time blocks'
           end
+          # Continue to interate
           other_time_block = otbs.pop
         end
       end

@@ -10,7 +10,7 @@
 
 	- @time_blocks.each do |time_block|
 		%tr
-			%td= time_block.project.name
+			%td= link_to time_block.project.name, project_path(time_block.project)
 			%td= display_time time_block.start_time
 			%td= display_time time_block.end_time
 			%td= link_to 'Edit', edit_time_block_path(time_block)

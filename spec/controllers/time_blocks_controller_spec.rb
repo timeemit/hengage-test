@@ -68,17 +68,26 @@ describe TimeBlocksController do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved time_block as @time_block" do
-        # Trigger the behavior that occurs when invalid params are submitted
         TimeBlock.any_instance.stub(:save).and_return(false)
         post :create, {:time_block => {  }}
         assigns(:time_block).should be_a_new(TimeBlock)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
         TimeBlock.any_instance.stub(:save).and_return(false)
         post :create, {:time_block => {  }}
         response.should render_template("new")
+      end
+    end
+    
+    describe 'with valid params but for a different user' do
+      it "creates a new TimeBlock that is made for the user" do
+        attrs = valid_attributes
+        attrs[:user_id] = create(:admin).id
+        expect {
+          post :create, {:time_block => attrs}
+        }.to change(TimeBlock, :count).by(1)
+        TimeBlock.last.user_id.should eql user.id
       end
     end
   end
@@ -87,10 +96,6 @@ describe TimeBlocksController do
     describe "with valid params" do
       it "updates the requested time_block" do
         time_block = TimeBlock.create! valid_attributes
-        # Assuming there are no other time_blocks in the database, this
-        # specifies that the TimeBlock created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
         TimeBlock.any_instance.should_receive(:update_attributes).with({ "these" => "params" })
         put :update, {:id => time_block.to_param, :time_block => { "these" => "params" }}
       end
@@ -111,7 +116,6 @@ describe TimeBlocksController do
     describe "with invalid params" do
       it "assigns the time_block as @time_block" do
         time_block = TimeBlock.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
         TimeBlock.any_instance.stub(:save).and_return(false)
         put :update, {:id => time_block.to_param, :time_block => {  }}
         assigns(:time_block).should eq(time_block)
@@ -119,7 +123,6 @@ describe TimeBlocksController do
 
       it "re-renders the 'edit' template" do
         time_block = TimeBlock.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
         TimeBlock.any_instance.stub(:save).and_return(false)
         put :update, {:id => time_block.to_param, :time_block => {  }}
         response.should render_template("edit")

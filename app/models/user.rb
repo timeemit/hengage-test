@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :time_blocks
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable, :registerable
@@ -11,7 +13,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :admin
   
-  
+
   before_create :set_default_password
   
   validates :email, :presence => true, :format => {:with => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i},

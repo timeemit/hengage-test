@@ -23,14 +23,6 @@ describe TimeBlocksController do
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested time_block as @time_block" do
-      time_block = TimeBlock.create! valid_attributes
-      get :show, {:id => time_block.to_param}
-      assigns(:time_block).should eq(time_block)
-    end
-  end
-
   describe "GET new" do
     it "assigns a new time_block as @time_block" do
       get :new, {}

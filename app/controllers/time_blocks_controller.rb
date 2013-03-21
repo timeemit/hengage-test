@@ -1,10 +1,6 @@
 class TimeBlocksController < ApplicationController
   def index
-    @time_blocks = current_user.time_blocks
-  end
-
-  def show
-    @time_block = current_user.time_blocks.where(:id => params[:id]).first
+    @time_blocks = current_user.time_blocks.includes(:project)
   end
 
   def new

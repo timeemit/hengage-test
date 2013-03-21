@@ -54,7 +54,7 @@ describe TimeBlocksController do
 
       it "redirects to the created time_block" do
         post :create, {:time_block => valid_attributes}
-        response.should redirect_to(TimeBlock.last)
+        response.should redirect_to time_blocks_path
       end
     end
 
@@ -101,7 +101,7 @@ describe TimeBlocksController do
       it "redirects to the time_block" do
         time_block = TimeBlock.create! valid_attributes
         put :update, {:id => time_block.to_param, :time_block => valid_attributes}
-        response.should redirect_to(time_block)
+        response.should redirect_to time_blocks_path
       end
     end
 

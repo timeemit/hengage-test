@@ -24,6 +24,10 @@ class TimeBlock < ActiveRecord::Base
     other_time_block.includes?(start_time) or other_time_block.includes?(end_time)
   end
   
+  def seconds_worked
+    end_time - start_time
+  end
+  
   private
   
   def sequence_of_times

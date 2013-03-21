@@ -74,4 +74,8 @@ describe TimeBlock do
     build(:time_block, start_time: time_block.start_time - 1.second, end_time: time_block.end_time + 1.second, user_id: user_id, project_id: project_id).
       valid?.should be_false
   end
+
+  it 'knows how many seconds it has worked' do
+    time_block.seconds_worked.should eql 600.0
+  end
 end

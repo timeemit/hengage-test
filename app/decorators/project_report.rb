@@ -1,5 +1,5 @@
 class ProjectReport
-  attr_reader :seconds_for, :time_blocks, :users
+  attr_reader :seconds_worked_for, :time_blocks, :users
   
   def initialize(attrs)
     @project_id, @start_time, @end_time = attrs[:project_id], attrs[:start_time], attrs[:end_time]
@@ -19,9 +19,9 @@ class ProjectReport
   end
   
   def calculate_seconds_for_users!
-    @seconds_for = {}
+    @seconds_worked_for = {}
     @users.each do |user|
-      @seconds_for[user.id] = @time_blocks.find_all{|tb| tb.user_id == user.id}.inject(0){|sum, tb| sum + tb.seconds_worked}
+      @seconds_worked_for[user.id] = @time_blocks.find_all{|tb| tb.user_id == user.id}.inject(0){|sum, tb| sum + tb.seconds_worked}
     end
   end
 end

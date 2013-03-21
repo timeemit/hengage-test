@@ -4,14 +4,23 @@
 
 	%p
 		= label_tag :start_time
-		= datetime_select :report, :start_time, :default => 1.day.ago
+		= datetime_select :report, :start_time, :default => @start_time
 	
 	%p
 		= label_tag :end_time
-		= datetime_select :report, :end_time
+		= datetime_select :report, :end_time, :default => @end_time
 
 	%p
 		= submit_tag 'View'
+
+%table
+	%tr
+		%th Email
+		%th Hours Worked on this Project
+	- @project_report.users.each do |user|
+		%tr
+			%td= user.email
+			%td= rounded_hours_from_seconds @project_report.seconds_worked_for[user.id]
 
 = link_to 'Edit', edit_project_path(@project)
 |

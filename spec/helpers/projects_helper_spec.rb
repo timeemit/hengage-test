@@ -1,15 +1,13 @@
 require 'spec_helper'
 
-# Specs in this file have access to a helper object that includes
-# the ProjectsHelper. For example:
-#
-# describe ProjectsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       helper.concat_strings("this","that").should == "this that"
-#     end
-#   end
-# end
 describe ProjectsHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'converts seconds to hours and rounds appropriately' do
+    helper.rounded_hours_from_seconds(60).should == 1.0
+    helper.rounded_hours_from_seconds(70).should == 1.25
+    helper.rounded_hours_from_seconds(80).should == 1.25
+    helper.rounded_hours_from_seconds(90).should == 1.5
+    helper.rounded_hours_from_seconds(100).should == 1.75
+    helper.rounded_hours_from_seconds(110).should == 1.75
+    helper.rounded_hours_from_seconds(120).should == 2.0
+  end
 end

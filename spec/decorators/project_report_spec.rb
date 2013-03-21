@@ -39,7 +39,7 @@ describe ProjectReport do
   end
   
   it 'calculates the number of seconds worked by each employee correctly' do
-    project_report.seconds_for[user.id].should eql 2400.0
-    project_report.seconds_for[admin.id].should eql 600.0
+    project_report.seconds_worked_for[user.id].should eql 2400.0
+    project_report.seconds_worked_for[admin.id].should eql 600.0
   end
 end

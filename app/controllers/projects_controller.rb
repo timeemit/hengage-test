@@ -6,7 +6,14 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    params[:report].present? ? (@start_time = time_from_params('start_time')) : (@start_time = Time.zone.now - 1.day)
+    params[:report].present? ? (@end_time = time_from_params('end_time')) : (@end_time = Time.zone.now - 1.day)
     @project = Project.find(params[:id])
+    if @start_time > @end_time
+      flash[:alert] = 'End Time is before the Start Time??!'
+    else
+      @project_report = ProjectReport.new(:project_id => @project.id, :start_time => @start_time, :end_time => @end_time)
+    end
   end
 
   def new
@@ -22,6 +29,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to @project, notice: 'Project was successfully created.'
     else
+      flash[:alert] = 'Oh noes!  Something went wrong.'
       render action: "new"
     end
   end
@@ -31,7 +39,9 @@ class ProjectsController < ApplicationController
     if @project.update_attributes(params[:project])
       redirect_to @project, notice: 'Project was successfully updated.'
     else
+      flash[:alert] = 'Gosh Darn!  Something went wrong.'
       render action: "edit"
     end
   end
+  
 end

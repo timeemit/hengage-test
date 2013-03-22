@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
     if @start_time < @end_time
       @project_report = ProjectReport.new(:project_id => @project.id, :start_time => @start_time, :end_time => @end_time)
     else
-      flash[:alert] = 'The times you\'ve entered don\'t make sense!!!  May get strange response!'
+      redirect_to project_path(@project), alert: 'The times you\'ve entered don\'t make sense!!!'
     end
   end
 

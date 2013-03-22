@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if @start_time < @end_time
       @user_report = UserReport.new(:user_id => @user.id, :start_time => @start_time, :end_time => @end_time)
     else
-      flash[:alert] = 'The times you\'ve entered don\'t make sense!!!  May get strange response!'
+      redirect_to user_path(@user), alert: 'The times you\'ve entered don\'t make sense!!!  May get strange response!'
     end
   end
 

@@ -21,11 +21,48 @@ describe ProjectsController do
     end
 
     describe "GET show" do
+      let(:report_time) {
+        { 
+          'start_time(1i)' => Time.now.year,
+          'start_time(2i)' => Time.now.month,
+          'start_time(3i)' => Time.now.day,
+          'start_time(4i)' => Time.now.hour,
+          'start_time(5i)' => Time.now.min,
+          'end_time(1i)' => Time.now.year,
+          'end_time(2i)' => Time.now.month,
+          'end_time(3i)' => Time.now.day,
+          'end_time(4i)' => Time.now.hour,
+          'end_time(5i)' => Time.now.min,
+        }
+      }
+
       it "assigns the requested project as @project" do
         project = Project.create! valid_attributes
         get :show, {:id => project.to_param}
         assigns(:project).should eq(project)
       end
+   
+      it "assigns a report to the requested project as @project_report" do
+        project = Project.create! valid_attributes
+        get :show, {:id => project.to_param}
+        assigns(:project_report).should_not be_nil
+      end
+      
+      it 'redirects if the start and end dates are equal' do
+        project = Project.create! valid_attributes
+        get :show, {:id => project.to_param, :report => report_time}
+        response.should be_redirect
+        assigns(:project_report).should be_nil
+      end
+
+      it 'redirects if the start and end dates are nonsensical' do
+        project = Project.create! valid_attributes
+        report_time['end_time(5i)'] = (Time.now - 1.minute).min
+        get :show, {:id => project.to_param, :report => report_time}
+        response.should be_redirect
+        assigns(:project_report).should be_nil
+      end
+
     end
 
     describe "GET new" do

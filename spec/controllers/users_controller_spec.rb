@@ -11,10 +11,43 @@ describe UsersController do
 
 
     describe "GET 'show'" do
+      let(:report_time) {
+        { 
+          'start_time(1i)' => Time.now.year,
+          'start_time(2i)' => Time.now.month,
+          'start_time(3i)' => Time.now.day,
+          'start_time(4i)' => Time.now.hour,
+          'start_time(5i)' => Time.now.min,
+          'end_time(1i)' => Time.now.year,
+          'end_time(2i)' => Time.now.month,
+          'end_time(3i)' => Time.now.day,
+          'end_time(4i)' => Time.now.hour,
+          'end_time(5i)' => Time.now.min,
+        }
+      }
+   
       it "returns http success" do
         get 'show', id: user.id
         response.should be_success
         expect(response).to render_template("show")
+      end
+  
+      it "assigns a report to the requested user as @user_report" do
+        get :show, {:id => user.to_param}
+        assigns(:user_report).should_not be_nil
+      end
+      
+      it 'redirects if the start and end dates are equal' do
+        get :show, {:id => user.to_param, :report => report_time}
+        response.should be_redirect
+        assigns(:user_report).should be_nil
+      end
+
+      it 'redirects if the start and end dates are nonsensical' do
+        report_time['end_time(5i)'] = (Time.now - 1.minute).min
+        get :show, {:id => user.to_param, :report => report_time}
+        response.should be_redirect
+        assigns(:user_report).should be_nil
       end
     end
 

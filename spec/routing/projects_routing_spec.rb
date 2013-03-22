@@ -26,10 +26,5 @@ describe ProjectsController do
     it "routes to #update" do
       put("/projects/1").should route_to("projects#update", :id => "1")
     end
-
-    it "routes to #destroy" do
-      delete("/projects/1").should route_to("projects#destroy", :id => "1")
-    end
-
   end
 end

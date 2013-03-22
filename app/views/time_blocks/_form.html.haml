@@ -1,5 +1,8 @@
 = form_for @time_block do |f|
 	%p
+		= f.error_messages
+
+	%p
 		= f.label :project_id
 		= f.select :project_id, @projects.collect{|p| [p.name, p.id] }, { :include_blank => true }
 	

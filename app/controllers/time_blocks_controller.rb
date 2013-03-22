@@ -1,6 +1,6 @@
 class TimeBlocksController < ApplicationController
   def index
-    @time_blocks = current_user.time_blocks.includes(:project)
+    @time_blocks = current_user.time_blocks.includes(:project).page(params[:page])
   end
 
   def new

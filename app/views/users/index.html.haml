@@ -2,6 +2,8 @@
 
 %p= link_to 'Make a New User', new_user_path
 
+%p= paginate @users 
+
 %table
 	%tr
 		%th Email
@@ -16,5 +18,7 @@
 			- if current_user.admin?
 				%td= link_to 'Edit', edit_user_path(user)
 			
+%p= paginate @users 
+
 - if current_user.admin?
 	%p= link_to 'Make a New User', new_user_path

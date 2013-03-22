@@ -2,6 +2,8 @@
 
 %p= link_to 'Make a New Project', new_project_path
 
+%p= paginate @projects
+
 %table
 	%tr
 		%th Name
@@ -13,5 +15,7 @@
 			%td= project.name
 			%td= link_to 'Show', project
 			%td= link_to 'Edit', edit_project_path(project)
+
+%p= paginate @projects
 
 %p= link_to 'Make a New Project', new_project_path

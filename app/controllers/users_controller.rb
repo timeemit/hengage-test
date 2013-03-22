@@ -2,8 +2,7 @@ class UsersController < ApplicationController
   before_filter :require_admin!, :only => [:new, :edit, :create, :update]
 
   def index
-    # I would never request all records in an actual application.
-    @users = User.all
+    @users = User.page(params[:page])
   end
 
   def show

@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_filter :require_admin!, :only => [:new, :edit, :create, :update]
   
   def index
-    @projects = Project.all
+    @projects = Project.page(params[:page])
   end
 
   def show

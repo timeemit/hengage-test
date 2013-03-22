@@ -1,5 +1,7 @@
 %h1 Listing Your Time Blocks
 
+%p= paginate @time_blocks
+
 %table
 	%tr
 		%th Project
@@ -15,5 +17,7 @@
 			%td= display_time time_block.end_time
 			%td= link_to 'Edit', edit_time_block_path(time_block)
 			%td= link_to 'Destroy', time_block, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%p= paginate @time_blocks
 
 %p= link_to 'Record a New Time Block', new_time_block_path
